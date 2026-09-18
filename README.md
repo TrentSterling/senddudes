@@ -16,9 +16,9 @@ Built on the crowd experiments from [BIOMASS](https://tront.xyz/biomass/). Inspi
 
 | Path | What |
 |---|---|
-| `index.html` | The game, v0.4.2. Edit this one. |
+| `index.html` | The game, v0.4.3. Edit this one. |
 | `og-image.png` | Social card (1200x630), rendered from the real game by `tools/og-campaign.mjs`. |
-| `versions/` | Frozen earlier drops (v0.3, v0.4, v0.4.1) for reference. |
+| `versions/` | Frozen earlier drops (v0.3 through v0.4.2) for reference. |
 | `tools/` | Headless harness (see below). Output lands in `tools/out/` (ignored). |
 
 ## Tools
@@ -33,7 +33,7 @@ node tools/og-campaign.mjs og-image.png          # render the social card (see e
 node tools/og-shot.mjs tools/out/x.png           # sandbox frontline shot variant
 ```
 
-OG recipe that shipped: `SECTOR=2 WAVE=3 STEPS=2400 S=23 X=0 Y=1 TITANS=8 CASTAT="15,-3;-13,8"` (Black Orchard, Marshal wave, practice run, guard immortal).
+OG recipe that shipped: `SECTOR=2 WAVE=3 STEPS=3000 S=48 X=8 Y=-4 TITANS=10 TITLE=1 CASTAT="6,-2;-5,4"` (Black Orchard, Marshal wave, practice run, guard immortal, wordmark overlay).
 
 ## License
 

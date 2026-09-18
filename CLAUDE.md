@@ -19,5 +19,5 @@ Headless Chrome needs `--enable-unsafe-webgpu --enable-features=Vulkan` and the 
 ## Rules
 
 - One file, no external scripts, no analytics. Keep it that way.
-- Do not put the version string in more than the places it already is (`<title>` block, `.build`, about panel, `BUILD`, JSON-LD `softwareVersion`, the v0.4.2 comment).
+- Do not put the version string in more than the places it already is (`<title>` block, `.build`, about panel, `BUILD`, JSON-LD `softwareVersion`, the version comment above the demo controls).
 - Games page card lives in `C:\Github\trentsterling.github.io\games\index.html` and reads `/senddudes/og-image.png`.

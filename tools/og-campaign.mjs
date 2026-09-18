@@ -10,7 +10,7 @@ const page = await launch({port: +env('PORT', 9370), width: 1200, height: 630});
 try {
   await page.goto(pathToFileURL(resolve(env('FILE', 'index.html'))).href + '#sandbox');
   await until(() => page.eval(`!!window.SendDudes && document.getElementById('boot').hidden`), {timeout: 60000, label: 'boot'});
-  await page.eval(`(()=>{const SD=window.SendDudes;SD.settings.blood=true;SD.settings.shadows=true;SD.settings.reduced=false;SD.settings.shake=false;SD.settings.resolution='1';
+  await page.eval(`(()=>{const SD=window.SendDudes;SD.settings.blood=true;SD.settings.shadows=true;SD.settings.reduced=false;SD.settings.shake=false;SD.settings.resolution='1';SD.settings.damageNumbers='off';
     SD.progress.data.clears=[true,true,true];
     for(const el of document.querySelectorAll('.hud,.masthead,.veil,#boot'))el.style.visibility='hidden';document.body.style.cursor='none';})()`);
   await page.eval(`window.SendDudes.launchSector(${env('SECTOR', 2)},false,true)`);
@@ -32,6 +32,9 @@ try {
   const at = env('CASTAT', '') ? env('CASTAT').split(';').map(p => p.split(',').map(Number)) : [];
   for (const [dx, dy] of at) { await page.eval(`(()=>{const SD=window.SendDudes;SD.gpu.cooldown=0;SD.cast(SD.view.x+${dx},SD.view.y+${dy});})()`); await page.eval(`window.SendDudes.step(${env('CASTTICKS', 6)})`); }
   await page.eval(`window.SendDudes.step(${env('SETTLETICKS', 2)})`);
+  if (env('TITLE', '')) await page.eval(`(()=>{const d=document.createElement('div');d.id='ogTitle';d.innerHTML='<div class="g"></div><div class="w">SEND <span>DUDES</span></div><div class="t">${env('TAG', 'Outnumbered? Send dudes.')}</div>';
+    const st=document.createElement('style');st.textContent='#ogTitle{position:fixed;inset:0;z-index:99;pointer-events:none;font-family:Impact,"Arial Black",Arial,sans-serif}#ogTitle .g{position:absolute;left:0;right:0;bottom:0;height:${env('GRAD', 300)}px;background:linear-gradient(180deg,rgba(11,18,22,0) 0%,rgba(11,18,22,.55) 45%,rgba(11,18,22,.92) 100%)}#ogTitle .w{position:absolute;left:${env('TX', 48)}px;bottom:${env('TY', 92)}px;font-size:${env('TS', 128)}px;line-height:.9;letter-spacing:-2px;transform:skew(-4deg);color:#eef3ea;text-shadow:0 6px 0 #0b1216,0 0 40px rgba(0,0,0,.8)}#ogTitle .w span{color:#d1f58f}#ogTitle .t{position:absolute;left:${env('TX', 48)}px;bottom:${env('TTY', 44)}px;font:700 ${env('TTS', 30)}px Arial,Helvetica,sans-serif;letter-spacing:.5px;color:#c8ead1;text-shadow:0 2px 0 #0b1216,0 0 18px rgba(0,0,0,.9)}';
+    document.head.appendChild(st);document.body.appendChild(d);})()`);
   await sleep(400);
   const rep = JSON.parse(await page.eval('JSON.stringify(window.SendDudes.report())'));
   console.log(out, 'state', rep.battle.state, 'alive', rep.battle.alive, 'tick', rep.battle.tick, 'mission', JSON.stringify(rep.battle.mission), 'roster', JSON.stringify(rep.battle.roster));

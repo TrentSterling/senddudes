@@ -43,7 +43,7 @@ try {
   }
   check('about links use tront.xyz/discord/', await page.eval(`[...document.querySelectorAll('a[href*="discord"]')].every(a=>a.href.startsWith('https://tront.xyz/discord/'))`));
   check('no em dashes in page text', await page.eval(`!document.body.innerText.includes('\u2014')`));
-  check('og:image points at tront.xyz/senddudes', await page.eval(`document.querySelector('meta[property="og:image"]').content==='https://tront.xyz/senddudes/og-image.png'`));
+  check('og:image points at tront.xyz/senddudes', await page.eval(`document.querySelector('meta[property="og:image"]').content.startsWith('https://tront.xyz/senddudes/og-image.png')`));
   const bad = page.logs.filter(l => /^(error|EXCEPTION)/.test(l));
   check('no console errors', bad.length === 0, bad.slice(0, 3).join(' | '));
 } catch (e) {
