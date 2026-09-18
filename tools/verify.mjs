@@ -17,7 +17,7 @@ try {
   await until(() => page.eval(`window.SendDudes.gpu.state==='fighting'`), {timeout: 30000, label: 'showcase'});
   await sleep(3000);
   let r = JSON.parse(await page.eval('JSON.stringify(window.SendDudes.report())'));
-  check('build string', r.build === 'send-dudes-0.4.2-demo', r.build);
+  check('build string', r.build.startsWith('send-dudes-0.4.3'), r.build);
   check('hardware adapter', r.environment.adapter && !r.environment.adapter.fallback, JSON.stringify(r.environment.adapter));
   check('self-check passed', r.selfCheck?.passed, r.selfCheck?.kind);
   check('200k showcase deployed', r.battle.initial[0] + r.battle.initial[1] === 200000, JSON.stringify(r.battle.initial));
