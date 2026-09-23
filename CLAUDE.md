@@ -4,8 +4,8 @@ Single-HTML WebGPU mass-battle game by Trent Sterling. Drafted with ChatGPT (dro
 
 ## Deploy loop
 
-1. Copy the new drop over `index.html`; freeze the previous one in `versions/`.
-2. Sweep em dashes (`grep -c "—" index.html` must be 0), keep Discord links on `tront.xyz/discord/`.
+1. Freeze the current `index.html` in `versions/`, save the drop as `versions/senddudes-vX-chatgpt.html`.
+2. `python tools/polish.py versions/senddudes-vX-chatgpt.html N` builds `index.html`: em dash sweep to 0, og:image `?v=N`, and the SEO About block carried over from the current page (hidden while the campaign dock is up). Update the build-string check in `tools/verify.mjs`.
 3. `node tools/verify.mjs` must be 20/20. Look at `tools/out/qa-*.png`.
 4. Re-render `og-image.png` with `tools/og-campaign.mjs` only if the look changed; bump `?v=` on the og:image meta when you do.
 5. Commit, push. Then `node tools/verify.mjs https://tront.xyz/senddudes/` once Pages rebuilds.
