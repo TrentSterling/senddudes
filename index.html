@@ -644,13 +644,25 @@ function damageLabel(cents,grouped=false,core=false){
 // Screen-space occupancy is rebuilt from the bounded live label list, including
 // earlier readbacks. It never reads soldiers or changes admitted damage totals.
 class DamageLabelLayout {
- constructor(width,top,bottom){this.width=width;this.top=top;this.bottom=bottom;this.cells=new Map();this.placed=[];}
+ constructor(width,top,bottom){this.width=width;this.top=top;this.bottom=bottom;this.cells=new Map();this.placed=[];this.probes=0;this.comparisons=0;}
  arrange(items){
+  const width=Math.max(0,this.width-4),height=Math.max(0,this.bottom-this.top-4),area=items.reduce((sum,p)=>sum+p.w*p.h,0);
+  // Impossible geometry must not fall through to per-label searches. Keep all
+  // totals at their anchors in O(n), including after a short-window resize.
+  if(area>width*height||items.some(p=>p.w>width||p.h>height))return this.anchors(items);
   // Dense viewports need rows rather than a fragmented set of floating gaps.
   // Sorting/packing is bounded by the same live-label cap, never army size.
-  if(items.reduce((area,p)=>area+p.w*p.h,0)>this.width*(this.bottom-this.top)*.4){const packed=this.pack(items);if(packed)return packed;}
-  const positions=items.map(p=>this.place(p.p,p.x,p.y,p.w,p.h));
-  return this.failed?(this.pack(items)||positions):positions;
+  if(area>width*height*.4)return this.pack(items)||this.anchors(items);
+  const positions=[];
+  for(const p of items){const pos=this.place(p.p,p.x,p.y,p.w,p.h);if(!pos)return this.pack(items)||this.anchors(items);positions.push(pos);}
+  return positions;
+ }
+ anchors(items){
+  return items.map(p=>{
+   const x=p.w>this.width-4?this.width*.5:Math.max(p.w*.5+2,Math.min(this.width-p.w*.5-2,p.x));
+   const y=p.h>this.bottom-this.top-4?(this.top+this.bottom)*.5:Math.max(this.top+p.h*.5+2,Math.min(this.bottom-p.h*.5-2,p.y));
+   p.p.textOffset={x:x-p.x,y:y-p.y};return{x,y};
+  });
  }
  pack(items){
   const rows=[];let row;
@@ -676,7 +688,15 @@ class DamageLabelLayout {
  place(p,x,y,w,h){
   const rect=(cx,cy)=>({x:cx-w*.5,y:cy-h*.5,w,h});
   const fits=r=>r.x>=2&&r.x+r.w<=this.width-2&&r.y>=this.top+2&&r.y+r.h<=this.bottom-2;
-  const free=r=>fits(r)&&this.cellsFor(r).every(k=>(this.cells.get(k)||[]).every(b=>r.x+r.w<=b.x||b.x+b.w<=r.x||r.y+r.h<=b.y||b.y+b.h<=r.y));
+  const free=r=>{
+   if(this.probes>=2048){this.exhausted=true;return false;}this.probes++;
+   if(!fits(r))return false;
+   for(const k of this.cellsFor(r))for(const b of this.cells.get(k)||[]){
+    if(this.comparisons>=8192){this.exhausted=true;return false;}this.comparisons++;
+    if(r.x+r.w>b.x&&b.x+b.w>r.x&&r.y+r.h>b.y&&b.y+b.h>r.y)return false;
+   }
+   return true;
+  };
   const keep=(cx,cy)=>{const r=rect(cx,cy);for(const k of this.cellsFor(r)){let cell=this.cells.get(k);if(!cell)this.cells.set(k,cell=[]);cell.push(r);}this.placed.push(r);p.textOffset={x:cx-x,y:cy-y};return{x:cx,y:cy};};
   // Keep a label's chosen lane while it floats; do not collapse it into gaps
   // left by expired labels. Reserve its maximum bounce size to avoid jitter.
@@ -686,18 +706,18 @@ class DamageLabelLayout {
   // Nearby lanes first. The search and spatial hash are bounded by label count,
   // not troop count, and test actual text widths instead of world-space bins.
   for(let ring=1;ring<=12;ring++){
-   for(let dy=-ring;dy<=ring;dy++)for(const dx of [-ring,ring]){const px=cx+dx*32,py=cy+dy*24;if(free(rect(px,py)))return keep(px,py);}
-   for(let dx=1-ring;dx<ring;dx++)for(const dy of [-ring,ring]){const px=cx+dx*32,py=cy+dy*24;if(free(rect(px,py)))return keep(px,py);}
+   for(let dy=-ring;dy<=ring;dy++)for(const dx of [-ring,ring]){if(this.exhausted)return null;const px=cx+dx*32,py=cy+dy*24;if(free(rect(px,py)))return keep(px,py);}
+   for(let dx=1-ring;dx<ring;dx++)for(const dy of [-ring,ring]){if(this.exhausted)return null;const px=cx+dx*32,py=cy+dy*24;if(free(rect(px,py)))return keep(px,py);}
   }
   // At viewport edges, fill gaps beside existing boxes rather than requiring
   // another whole lane. This fallback is also capped by the live label count.
   for(const b of this.placed){
-   for(const px of [b.x-w*.5,b.x+b.w+w*.5])for(const py of [cy,b.y+h*.5,b.y+b.h-h*.5])if(free(rect(px,py)))return keep(px,py);
-   for(const py of [b.y-h*.5,b.y+b.h+h*.5])for(const px of [cx,b.x+w*.5,b.x+b.w-w*.5])if(free(rect(px,py)))return keep(px,py);
+   for(const px of [b.x-w*.5,b.x+b.w+w*.5])for(const py of [cy,b.y+h*.5,b.y+b.h-h*.5]){if(this.exhausted)return null;if(free(rect(px,py)))return keep(px,py);}
+   for(const py of [b.y-h*.5,b.y+b.h+h*.5])for(const px of [cx,b.x+w*.5,b.x+b.w-w*.5]){if(this.exhausted)return null;if(free(rect(px,py)))return keep(px,py);}
   }
   // An exceptionally crowded viewport keeps its totals rather than dropping
   // feedback. Existing admission/lifetime limits still bound the work.
-  this.failed=true;return keep(cx,cy);
+  return null;
  }
 }
 class DamageText {

@@ -5,6 +5,9 @@ Run from the repository root:
 ```
 python tools/polish.py versions/senddudes-v0.6.3-chatgpt.html 3
 node --test tests/damage-labels/regression.mjs
+node tests/damage-labels/layout-work.mjs --base
+node tests/damage-labels/layout-work.mjs
+node tests/damage-labels/browser-work.mjs
 node tests/damage-labels/browser.mjs
 node tools/verify.mjs
 ```
@@ -40,3 +43,23 @@ dense or fragmented space. Row packing sorts only the bounded label list. It doe
 discard additional labels, change damage, shorten lifetimes or reduce the font. If a
 viewport cannot fit all admitted text, it retains totals at their clamped anchors rather
 than silently dropping them. Existing HUD layering and offscreen admission rules remain.
+
+Impossible area or oversized text bypasses collision search in O(n). Failed dense
+packing also goes directly to retained anchors. Local search shares a frame-wide
+budget of 2,048 candidates and 8,192 rectangle comparisons, then uses packed rows or
+anchors. No failed search is repeated once per remaining label.
+
+`layout-work.mjs` evaluates the exact layout class directly in Node, without VM or
+canvas overhead. It asserts deterministic work limits and retention of all 160 fixture
+totals, including physically overfull geometry, failed row packing, and cases that
+independently exhaust the candidate and rectangle-comparison budgets. Its
+timings are synthetic diagnostics, not game FPS. `browser-work.mjs` starts a real
+200,000-unit battle with normal controls, casts Rupture, resizes to 390x240, and only
+then freezes for diagnosis. It compares both exact layouts on copies of the real
+eligible label inputs. Separate synthetic browser fixtures cover the exact reviewer
+case (160 boxes of 85x24 in 390x844), its fitting 70x24 control, and a short window.
+Reports and screenshots are in `tools/out/layout-browser-work/`; set `LABEL_WORK_OUT`
+to preserve another run. A reported zero duration is below the browser timer's
+resolution, not zero work. The normal-input resize samples tested during review
+retained 45-46 eligible labels and did not reach physically overfull geometry. These
+fixtures demonstrate a valid layout input, not proven normal-play frequency.
