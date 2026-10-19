@@ -13,7 +13,7 @@ export async function launch({port, width = 1280, height = 800, headless = true}
     `--window-size=${width},${height}`, '--enable-unsafe-webgpu', '--enable-features=Vulkan', '--disable-features=CalculateNativeWinOcclusion', '--disable-backgrounding-occluded-windows', '--disable-renderer-backgrounding', '--disable-background-timer-throttling',
     '--no-first-run', '--no-default-browser-check', '--autoplay-policy=no-user-gesture-required', '--hide-scrollbars',
   ].filter(Boolean);
-  const proc = spawn(CHROME, args, {stdio: 'ignore'});
+  const proc = spawn(CHROME, args, {stdio: 'ignore', windowsHide: true});
   let info;
   for (let i = 0; i < 60; i++) {
     try { info = await (await fetch(`http://127.0.0.1:${port}/json/version`)).json(); break; } catch { await sleep(250); }
@@ -40,7 +40,7 @@ export async function launch({port, width = 1280, height = 800, headless = true}
   await call('Page.enable'); await call('Runtime.enable'); await call('Log.enable');
   await call('Emulation.setDeviceMetricsOverride', {width, height, deviceScaleFactor: 1, mobile: false});
   const page = {
-    logs, proc, dir,
+    logs, proc, dir, call,
     goto: url => call('Page.navigate', {url}),
     eval: async (expr) => { const r = await call('Runtime.evaluate', {expression: expr, returnByValue: true, awaitPromise: true}); if (r.exceptionDetails) throw new Error('eval: ' + (r.exceptionDetails.exception?.description || r.exceptionDetails.text)); return r.result.value; },
     shot: async (file) => { const {data} = await call('Page.captureScreenshot', {format: 'png'}); const fs = await import('node:fs'); fs.writeFileSync(file, Buffer.from(data, 'base64')); return file; },

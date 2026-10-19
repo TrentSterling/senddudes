@@ -13,7 +13,7 @@
 <meta content="1200" property="og:image:width"/><meta content="630" property="og:image:height"/><meta content="SEND DUDES title art featuring the game's armored Guard and horned Brood characters." property="og:image:alt"/>
 <meta content="summary_large_image" name="twitter:card"/><meta content="SEND DUDES by Tront" name="twitter:title"/><meta content="Hold the core. Recruit an army. Unlock Titans. A free GPU-driven siege game by Trent Sterling (Tront)." name="twitter:description"/><meta content="https://tront.xyz/senddudes/og-image.png?v=3" name="twitter:image"/>
 <link href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2212%22%20fill%3D%22%2311191e%22/%3E%3Cpath%20d%3D%22M10%2017%2048%2010%2055%2017%2051%2046%2015%2053%209%2045Z%22%20fill%3D%22%23d1f58f%22/%3E%3Cpath%20d%3D%22M15%2024%2047%2019%2047%2032%2016%2037Z%22%20fill%3D%22%2324363c%22/%3E%3Cpath%20d%3D%22m20%2027%208-1v5l-8%201zm17-2%207-1v5l-7%201z%22%20fill%3D%22%2398eff1%22/%3E%3Cpath%20d%3D%22m20%2043%2024-4%22%20stroke%3D%22%2324363c%22%20stroke-width%3D%225%22/%3E%3C/svg%3E" rel="icon"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoGame", "@id": "https://tront.xyz/senddudes/#game", "name": "SEND DUDES", "url": "https://tront.xyz/senddudes/", "description": "Defend a core through three sectors, recruit reinforcements and unlock Titans. A separate GPU-driven sandbox offers battles configured up to 200,000 fighters, including large elites and ranged enemies.", "image": "https://tront.xyz/senddudes/og-image.png?v=3", "author": {"@type": "Person", "name": "Trent Sterling", "alternateName": "Tront", "url": "https://tront.xyz/", "sameAs": ["https://github.com/TrentSterling"]}, "genre": ["Strategy", "Battle simulation"], "gamePlatform": "Web browser", "playMode": "https://schema.org/SinglePlayer", "applicationCategory": "GameApplication", "operatingSystem": "WebGPU-capable desktop browser", "browserRequirements": "JavaScript, WebGPU, a supported GPU and browser", "isAccessibleForFree": true, "softwareVersion": "0.6.2", "inLanguage": "en"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoGame", "@id": "https://tront.xyz/senddudes/#game", "name": "SEND DUDES", "url": "https://tront.xyz/senddudes/", "description": "Defend a core through three sectors, recruit reinforcements and unlock Titans. A separate GPU-driven sandbox offers battles configured up to 200,000 fighters, including large elites and ranged enemies.", "image": "https://tront.xyz/senddudes/og-image.png?v=3", "author": {"@type": "Person", "name": "Trent Sterling", "alternateName": "Tront", "url": "https://tront.xyz/", "sameAs": ["https://github.com/TrentSterling"]}, "genre": ["Strategy", "Battle simulation"], "gamePlatform": "Web browser", "playMode": "https://schema.org/SinglePlayer", "applicationCategory": "GameApplication", "operatingSystem": "WebGPU-capable desktop browser", "browserRequirements": "JavaScript, WebGPU, a supported GPU and browser", "isAccessibleForFree": true, "softwareVersion": "0.6.3", "inLanguage": "en"}</script>
 <style>
 :root {
   --paper:#e1e8e4; --pale:#f0f4ef; --ink:#11181c; --dark:#0e1519;
@@ -377,7 +377,7 @@ body.modal-active #liveHud .liveTop,body.modal-active #liveHud .liveBottom,body.
 }
 
 
-/* v0.6.2 - fewer captions, unchanged action access. */
+/* v0.6.3 - fewer captions, unchanged action access. */
 #liveHud #liveGuardStatus,#liveHud #liveBroodStatus,#liveHud .copyTechnical{display:none}
 #liveHud .liveObjective:empty,#liveHud #liveWaveLabel:empty,#liveHud .unitAlive:empty{display:none}
 #liveHud .unitIndex{font-size:12px;letter-spacing:0;color:#a7bfba}
@@ -408,7 +408,7 @@ body:not(.campaign) #liveHud .liveMission{width:fit-content;min-width:138px}
 @media(max-width:760px){body:not(.campaign) #liveHud .liveBottom{right:8px;width:calc(100% - 16px);grid-template-areas:"actions utility"}}
 </style></head><body>
 <canvas aria-label="SEND DUDES battlefield. Escape or right-click opens the menu. Click the core or press Tab to recruit." id="world" tabindex="0"></canvas><div class="veil" hidden="" id="pauseModal"><section aria-labelledby="pauseTitle" aria-modal="true" class="panel fieldMenu" role="dialog">
-<header class="fieldHead"><div><h1 id="pauseTitle">SEND <span>DUDES</span></h1><p>by <a href="https://tront.xyz/" rel="noopener" target="_blank">Tront</a> <span> / v0.6.2</span></p></div><button class="resumeButton" id="menuResume">Back to battle</button></header>
+<header class="fieldHead"><div><h1 id="pauseTitle">SEND <span>DUDES</span></h1><p>by <a href="https://tront.xyz/" rel="noopener" target="_blank">Tront</a> <span> / v0.6.3</span></p></div><button class="resumeButton" id="menuResume">Back to battle</button></header>
 <div class="fieldMenuBody"><div class="fieldChoices"><button class="sendMax" id="menu200"><b>200,000 DUDES</b><span>100,000 per side</span></button><nav aria-label="Game and tools" id="fieldNavigation"><button id="menuCampaign">Campaign</button><button id="modeButton">Sandbox</button><button id="headquartersButton">Upgrades</button><button id="toolsButton">Cheats</button><button id="benchmarkButton">Benchmark</button><button id="rosterButton">Roster</button><button id="settingsButton">Settings</button><button id="aboutButton">About</button><button id="helpButton">Help</button><button id="boulderDemo">Boulder clash</button><button id="techDemo">Weapons test</button></nav><nav class="fieldLinks"><a href="https://tront.xyz/" rel="noopener" target="_blank">Tront.xyz</a><a href="https://tront.xyz/games/" rel="noopener" target="_blank">More games</a></nav></div><section aria-label="Current battle" class="fieldControls"><div id="fieldReadouts"><div class="score"><div class="army"><img alt="Armored Guard" class="portrait" id="guardPortrait"/><div class="armyData"><div class="armyName">Grown Guard</div><div class="count" id="guardCount">50,000</div></div><div class="meter"><i id="guardMeter"></i></div></div><div class="clock"><time id="clock">00:00</time><span id="stateLabel">Ready</span></div><div class="army brood"><img alt="Horned Brood" class="portrait" id="broodPortrait"/><div class="armyData"><div class="armyName">Feral Brood</div><div class="count" id="broodCount">50,000</div></div><div class="meter"><i id="broodMeter"></i></div></div></div><section class="missionBrief hud" hidden="" id="missionBrief"><div><b id="sectorLabel">Timberline</b><span id="waveLabel">Wave 1 / 4</span></div><div class="coreRead"><span>Core <strong id="coreValue">600 / 600</strong></span><div class="coreTrack"><i id="coreBar"></i></div></div><p id="chaseText"></p></section><div class="fieldStamp hud"><b id="populationStamp">100,000 deployed</b><span id="seedStamp">Seed 314159</span></div><div class="sessionBanner hud" hidden="" id="sessionBanner"><span id="sessionLabel"></span><button id="sessionAction">Demo tools</button></div><div class="hint hud" hidden="" id="hint">Wheel to zoom · Drag to pan · E to rupture</div></div><div id="fieldActions"><button id="soundButton">Sound on</button><button id="menuRecruit">Recruit</button><footer class="command hud"><div class="commandRow"><div class="tactical"><button class="primary" id="battleButton"><b id="battleText">Send dudes</b><small>SPACE</small></button><button aria-pressed="false" class="rupture" id="ruptureButton"><svg aria-hidden="true" viewbox="0 0 36 36"><path d="M18 3v7M18 26v7M3 18h7M26 18h7" stroke="currentColor" stroke-width="2.5"></path><path d="m18 10 4 5 5 3-5 4-4 5-4-5-5-4 5-3Z" fill="none" stroke="currentColor" stroke-width="2.5"></path></svg><span><b>Rupture</b><small id="ruptureText">Ready to fire</small></span><span class="key">E</span><i class="charge" id="charge"></i></button><button class="replay campaignOnly" id="rallyButton">Rally <small>G</small></button><button class="replay" id="replayButton">Fight again</button></div>
 <div class="deployment sandboxOnly"><label for="population">Army size<select aria-label="Sandbox army size" id="population"><option value="2000,2000">4,000 · Skirmish</option><option value="10000,10000">20,000 · War</option><option selected="" value="50000,50000">100,000 · Mass war</option><option value="10000,100000">110,000 · Outnumbered</option><option value="100000,100000">200,000 · Stress test</option></select></label><label for="doctrine">Battle mix<select id="doctrine"><option value="0">Combined arms</option><option value="1">Classic melee</option><option value="2">Ranged clash</option><option value="3">Elite tide</option></select></label><button class="deployButton" id="deployButton">Deploy</button></div>
 <nav aria-label="Camera and simulation" class="cameraButtons"><button id="frontButton">Frame battle</button><button class="overview" id="overviewButton">Whole arena</button><button class="perfButton" id="perfButton"><strong>GPU</strong><span id="perfBadge">Compute</span></button><div class="speedBox"><label for="speedButton">Speed</label><select aria-label="Requested simulation speed" class="speed" id="speedButton"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option selected="" value="1">1×</option><option value="2">2×</option><option value="5">5×</option><option value="10">10×</option><option value="20">20×</option><option value="50">50×</option></select><span class="actual" id="actualSpeed">Ready</span></div></nav></div></footer><div class="renderNotice" hidden="" id="renderNotice"></div></div></section></div>
@@ -537,7 +537,7 @@ body:not(.campaign) #liveHud .liveMission{width:fit-content;min-width:138px}
 <div class="veil" hidden="" id="helpModal"><section aria-labelledby="helpTitle" aria-modal="true" class="panel" role="dialog"><header><h2 id="helpTitle">Controls</h2><button data-close="">Back</button></header><p>Campaign: defend the core and buy reinforcements. Sandbox: choose two armies and fight.</p><dl class="keyList"><dt>Escape / right-click</dt><dd>Open the menu. While aiming: cancel first.</dd><dt>Space</dt><dd>Start / pause / resume.</dd><dt>Click core / Tab</dt><dd>Open paused recruitment.</dd><dt>E, then click</dt><dd>Aim Rupture. Right-click or Escape cancels.</dd><dt>G, then click</dt><dd>Rally defenders. Shift+G clears it.</dd><dt>Wheel / drag</dt><dd>Zoom / pan.</dd><dt>F / Home</dt><dd>Frame the battle / show the entire arena.</dd><dt>[ / ]</dt><dd>Change speed (0.25×–50×).</dd><dt>1 / 2 / 3 / 4</dt><dd>Recruit Vanguard / Bulwark / Lancer / Titan in campaign.</dd><dt>B / C / F3</dt><dd>Sandbox / cheats / optional live telemetry.</dd><dt>N / H</dt><dd>Cycle damage labels / temporarily hide combat labels.</dd><dt>R</dt><dd>Restart the battle.</dd></dl><p id="abilityInfo"></p><p>For a large battle, choose 200,000 DUDES from the menu.</p><p>Combined arms mixes all troop types. Classic melee has no shooters. Ranged clash has only shooters.</p><div class="row"><button id="helpRoster">Roster</button></div></section></div>
 <div class="veil" hidden="" id="rosterModal"><section aria-labelledby="rosterTitle" aria-modal="true" class="panel rosterPanel" role="dialog"><header><h2 id="rosterTitle">Roster</h2><button data-close="">Back</button></header><div id="rosterHost"></div><p class="miniTag">Base stats. Upgrades apply during a run.</p></section></div>
 <div class="veil" hidden="" id="artModal"><section aria-labelledby="artTitle" aria-modal="true" class="panel artPanel" role="dialog"><header><h2 id="artTitle">Character art</h2><button data-close="">Back</button></header><div id="artHost"></div><p>11 unit types. 8 directions. 10 poses each.</p></section></div>
-<div class="veil" hidden="" id="aboutModal"><section aria-labelledby="aboutTitle" aria-modal="true" class="panel aboutPanel" role="dialog"><header><h2 id="aboutTitle">About &amp; credits</h2><button data-close="">Back</button></header><div class="aboutBrand">SEND DUDES</div><p class="byline">Made by <a href="https://tront.xyz/" rel="noopener" target="_blank">Tront</a><br/><span class="miniTag">Trent Sterling · v0.6.2</span></p><p>A free army-defense game by Trent Sterling. Also includes sandbox battles up to 200,000 troops.</p><nav aria-label="More from Tront" class="linkStrip"><a href="https://tront.xyz/" rel="noopener" target="_blank">Tront.xyz</a><a href="https://tront.xyz/games/" rel="noopener" target="_blank">More games</a><a href="https://tront.xyz/blog/" rel="noopener" target="_blank">Dev blog</a><a href="https://tront.xyz/discord/" rel="noopener" target="_blank">Discord</a><a href="https://github.com/TrentSterling" rel="noopener" target="_blank">GitHub</a></nav><div class="row"><button id="copyLinkButton">Copy game link</button></div><h3>Technology</h3><p>GPU-driven movement, contacts, projectiles and damage. Blood is stored in a fixed-size texture.</p><div class="credits"><h3>Credits</h3><p>Built on <a href="https://tront.xyz/biomass/" rel="noopener" target="_blank">Tront's BIOMASS</a> crowd experiments. Inspired by mass-horde defense games including Crown Siege and Sir, We Have an Orc Problem. Independent project, no affiliation and no assets from those games.</p><p>Code and procedural art developed with AI assistance. MIT license. No tracking or runtime downloads. Progress saves in this browser; export it from Upgrades. Unfinished runs are not saved.</p><small>© 2026 Trent Sterling · tront.xyz/senddudes/</small></div></section></div>
+<div class="veil" hidden="" id="aboutModal"><section aria-labelledby="aboutTitle" aria-modal="true" class="panel aboutPanel" role="dialog"><header><h2 id="aboutTitle">About &amp; credits</h2><button data-close="">Back</button></header><div class="aboutBrand">SEND DUDES</div><p class="byline">Made by <a href="https://tront.xyz/" rel="noopener" target="_blank">Tront</a><br/><span class="miniTag">Trent Sterling · v0.6.3</span></p><p>A free army-defense game by Trent Sterling. Also includes sandbox battles up to 200,000 troops.</p><nav aria-label="More from Tront" class="linkStrip"><a href="https://tront.xyz/" rel="noopener" target="_blank">Tront.xyz</a><a href="https://tront.xyz/games/" rel="noopener" target="_blank">More games</a><a href="https://tront.xyz/blog/" rel="noopener" target="_blank">Dev blog</a><a href="https://tront.xyz/discord/" rel="noopener" target="_blank">Discord</a><a href="https://github.com/TrentSterling" rel="noopener" target="_blank">GitHub</a></nav><div class="row"><button id="copyLinkButton">Copy game link</button></div><h3>Technology</h3><p>GPU-driven movement, contacts, projectiles and damage. Blood is stored in a fixed-size texture.</p><div class="credits"><h3>Credits</h3><p>Built on <a href="https://tront.xyz/biomass/" rel="noopener" target="_blank">Tront's BIOMASS</a> crowd experiments. Inspired by mass-horde defense games including Crown Siege and Sir, We Have an Orc Problem. Independent project, no affiliation and no assets from those games.</p><p>Code and procedural art developed with AI assistance. MIT license. No tracking or runtime downloads. Progress saves in this browser; export it from Upgrades. Unfinished runs are not saved.</p><small>© 2026 Trent Sterling · tront.xyz/senddudes/</small></div></section></div>
 <div class="boot" id="boot"><h1>SEND DUDES</h1><p id="bootText">Loading…</p><div class="loadbar" id="loadbar"></div><button hidden="" id="reloadButton">Reload game</button><div class="staticIntro">Requires a WebGPU-capable browser.</div><nav class="bootLinks"><a href="https://tront.xyz/" rel="noopener" target="_blank">Tront.xyz</a><a href="https://tront.xyz/games/" rel="noopener" target="_blank">More games</a><a href="https://tront.xyz/discord/" rel="noopener" target="_blank">Discord</a></nav></div>
 <noscript><section>Enable JavaScript in a WebGPU-capable browser to play SEND DUDES by Trent Sterling (Tront). <a href="https://tront.xyz/games/">More games by Tront</a></section></noscript>
 <div class="veil" hidden="" id="hqModal"><section aria-labelledby="hqTitle" aria-modal="true" class="panel hqPanel" role="dialog"><header><div><h2 id="hqTitle">Upgrades</h2></div><button data-close="">Back</button></header><div class="hqLayout"><div class="contracts"><h3>Operations</h3><div id="contractList"></div><p>Troops heal between waves. Salvage lasts one run. Research is permanent.</p><div class="saveTools"><button id="hqSettings">Settings</button><button id="hqHelp">Controls</button><button id="hqAbout">About</button><button id="exportSave">Export save</button><button id="importSave">Import save</button><input accept="application/json,.json" hidden="" id="saveFile" type="file"/></div><small id="progressWarning"></small></div><div class="researchArea"><div class="researchHeading"><span>Research <strong id="researchBalance">0</strong></span><button id="respecButton">Free respec</button></div><p>Upgrades apply next run. Clear Timberline to unlock Titans.</p><div class="researchTree" id="researchTree"></div></div></div></section></div>
@@ -571,7 +571,7 @@ No external runtime dependencies. No reference-game assets.
 /* SEND DUDES. Original game by Trent Sterling (Tront).
  * Based on the author's BIOMASS experiments. MIT license retained below.
  * No network requests or external assets are required by the game. */
-const BUILD='send-dudes-0.6.2-copy';
+const BUILD='send-dudes-0.6.3-labels';
 const HOME = 'https://tront.xyz/';
 const GAME_URL = 'https://tront.xyz/senddudes/';
 const SPEEDS = [0.25, 0.5, 1, 2, 5, 10, 20, 50];
@@ -641,6 +641,85 @@ function damageLabel(cents,grouped=false,core=false){
  const value=(cents/100).toFixed(cents%100===0?0:cents%10===0?1:2);
  return (core?'CORE −':grouped?'Σ':'')+value;
 }
+// Screen-space occupancy is rebuilt from the bounded live label list, including
+// earlier readbacks. It never reads soldiers or changes admitted damage totals.
+class DamageLabelLayout {
+ constructor(width,top,bottom){this.width=width;this.top=top;this.bottom=bottom;this.cells=new Map();this.placed=[];this.probes=0;this.comparisons=0;}
+ arrange(items){
+  const width=Math.max(0,this.width-4),height=Math.max(0,this.bottom-this.top-4),area=items.reduce((sum,p)=>sum+p.w*p.h,0);
+  // Impossible geometry must not fall through to per-label searches. Keep all
+  // totals at their anchors in O(n), including after a short-window resize.
+  if(area>width*height||items.some(p=>p.w>width||p.h>height))return this.anchors(items);
+  // Dense viewports need rows rather than a fragmented set of floating gaps.
+  // Sorting/packing is bounded by the same live-label cap, never army size.
+  if(area>width*height*.4)return this.pack(items)||this.anchors(items);
+  const positions=[];
+  for(const p of items){const pos=this.place(p.p,p.x,p.y,p.w,p.h);if(!pos)return this.pack(items)||this.anchors(items);positions.push(pos);}
+  return positions;
+ }
+ anchors(items){
+  return items.map(p=>{
+   const x=p.w>this.width-4?this.width*.5:Math.max(p.w*.5+2,Math.min(this.width-p.w*.5-2,p.x));
+   const y=p.h>this.bottom-this.top-4?(this.top+this.bottom)*.5:Math.max(this.top+p.h*.5+2,Math.min(this.bottom-p.h*.5-2,p.y));
+   p.p.textOffset={x:x-p.x,y:y-p.y};return{x,y};
+  });
+ }
+ pack(items){
+  const rows=[];let row;
+  for(const item of [...items].sort((a,b)=>a.y-b.y||a.x-b.x)){
+   if(item.w>this.width-4)return null;
+   if(!row||row.w+item.w>this.width-4){row={items:[],w:0,h:0};rows.push(row);}
+   row.items.push(item);row.w+=item.w;row.h=Math.max(row.h,item.h);
+  }
+  if(rows.reduce((height,r)=>height+r.h,0)>this.bottom-this.top-4)return null;
+  let edge=this.top+2;
+  for(const r of rows){const y=r.items.reduce((sum,p)=>sum+p.y,0)/r.items.length;r.y=Math.max(edge,y-r.h*.5);edge=r.y+r.h;}
+  edge=this.bottom-2;
+  for(let i=rows.length-1;i>=0;i--){const r=rows[i];r.y=Math.min(r.y,edge-r.h);edge=r.y;}
+  const positions=new Map();
+  for(const r of rows){
+   const center=r.items.reduce((sum,p)=>sum+p.x,0)/r.items.length;
+   let left=Math.max(2,Math.min(this.width-r.w-2,center-r.w*.5));
+   for(const p of r.items.sort((a,b)=>a.x-b.x)){const pos={x:left+p.w*.5,y:r.y+r.h*.5};positions.set(p,pos);p.p.textOffset={x:pos.x-p.x,y:pos.y-p.y};left+=p.w;}
+  }
+  return items.map(p=>positions.get(p));
+ }
+ cellsFor(r){const keys=[];for(let y=Math.floor(r.y/64);y<=Math.floor((r.y+r.h)/64);y++)for(let x=Math.floor(r.x/64);x<=Math.floor((r.x+r.w)/64);x++)keys.push(x+','+y);return keys;}
+ place(p,x,y,w,h){
+  const rect=(cx,cy)=>({x:cx-w*.5,y:cy-h*.5,w,h});
+  const fits=r=>r.x>=2&&r.x+r.w<=this.width-2&&r.y>=this.top+2&&r.y+r.h<=this.bottom-2;
+  const free=r=>{
+   if(this.probes>=2048){this.exhausted=true;return false;}this.probes++;
+   if(!fits(r))return false;
+   for(const k of this.cellsFor(r))for(const b of this.cells.get(k)||[]){
+    if(this.comparisons>=8192){this.exhausted=true;return false;}this.comparisons++;
+    if(r.x+r.w>b.x&&b.x+b.w>r.x&&r.y+r.h>b.y&&b.y+b.h>r.y)return false;
+   }
+   return true;
+  };
+  const keep=(cx,cy)=>{const r=rect(cx,cy);for(const k of this.cellsFor(r)){let cell=this.cells.get(k);if(!cell)this.cells.set(k,cell=[]);cell.push(r);}this.placed.push(r);p.textOffset={x:cx-x,y:cy-y};return{x:cx,y:cy};};
+  // Keep a label's chosen lane while it floats; do not collapse it into gaps
+  // left by expired labels. Reserve its maximum bounce size to avoid jitter.
+  if(p.textOffset){const cx=x+p.textOffset.x,cy=y+p.textOffset.y;if(free(rect(cx,cy)))return keep(cx,cy);}
+  const cx=Math.max(w*.5+2,Math.min(this.width-w*.5-2,x)),cy=Math.max(this.top+h*.5+2,Math.min(this.bottom-h*.5-2,y));
+  if(free(rect(cx,cy)))return keep(cx,cy);
+  // Nearby lanes first. The search and spatial hash are bounded by label count,
+  // not troop count, and test actual text widths instead of world-space bins.
+  for(let ring=1;ring<=12;ring++){
+   for(let dy=-ring;dy<=ring;dy++)for(const dx of [-ring,ring]){if(this.exhausted)return null;const px=cx+dx*32,py=cy+dy*24;if(free(rect(px,py)))return keep(px,py);}
+   for(let dx=1-ring;dx<ring;dx++)for(const dy of [-ring,ring]){if(this.exhausted)return null;const px=cx+dx*32,py=cy+dy*24;if(free(rect(px,py)))return keep(px,py);}
+  }
+  // At viewport edges, fill gaps beside existing boxes rather than requiring
+  // another whole lane. This fallback is also capped by the live label count.
+  for(const b of this.placed){
+   for(const px of [b.x-w*.5,b.x+b.w+w*.5])for(const py of [cy,b.y+h*.5,b.y+b.h-h*.5]){if(this.exhausted)return null;if(free(rect(px,py)))return keep(px,py);}
+   for(const py of [b.y-h*.5,b.y+b.h+h*.5])for(const px of [cx,b.x+w*.5,b.x+b.w-w*.5]){if(this.exhausted)return null;if(free(rect(px,py)))return keep(px,py);}
+  }
+  // An exceptionally crowded viewport keeps its totals rather than dropping
+  // feedback. Existing admission/lifetime limits still bound the work.
+  return null;
+ }
+}
 class DamageText {
  constructor(){this.mode='smart';this.clock=0;this.live=[];this.cache=new Map();this.cpu=[];this.sequence=0;this.received=0;this.shown=0;this.suppressed=0;this.grouped=0;this.warning='';}
  clear(){this.preview=false;this.live.length=0;this.clock=0;this.received=0;this.shown=0;this.suppressed=0;this.grouped=0;this.cpu.length=0;}
@@ -675,7 +754,10 @@ class DamageText {
   const key=color+'|'+text;let sprite=this.cache.get(key);if(sprite){this.cache.delete(key);this.cache.set(key,sprite);return sprite;}
   const c=document.createElement('canvas'),ctx=c.getContext('2d');ctx.font='900 30px Arial, sans-serif';const w=Math.ceil(ctx.measureText(text).width)+20;
   c.width=w*2;c.height=94;ctx.scale(2,2);ctx.font='900 30px Arial, sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineJoin='round';ctx.lineWidth=5;ctx.strokeStyle='#101617';ctx.strokeText(text,w/2,24);ctx.fillStyle=color;ctx.fillText(text,w/2,23);
-  sprite={canvas:c,w,h:47};this.cache.set(key,sprite);if(this.cache.size>192){const old=this.cache.keys().next().value;this.cache.delete(old);}return sprite;
+  // Measure the painted glyphs plus their outline, not the transparent sprite
+  // padding. This leaves room for full-size totals on narrow viewports.
+  const m=ctx.measureText(text),ink={x:w*.5-m.actualBoundingBoxLeft-3,y:23-m.actualBoundingBoxAscent-3,w:m.actualBoundingBoxLeft+m.actualBoundingBoxRight+6,h:m.actualBoundingBoxAscent+m.actualBoundingBoxDescent+7};
+  sprite={canvas:c,w,h:47,ink};this.cache.set(key,sprite);if(this.cache.size>192){const old=this.cache.keys().next().value;this.cache.delete(old);}return sprite;
  }
  draw(ctx,view,dt,frozen,reduced,top=0,bottom=view.h){
   if(!frozen)this.clock+=Math.max(0,Math.min(.1,dt||0));
@@ -683,6 +765,7 @@ class DamageText {
   if(this.mode==='off'||!this.live.length)return;
   const start=performance.now();ctx.save();ctx.beginPath();ctx.rect(0,top,view.w,Math.max(0,bottom-top));ctx.clip();
   if(this.preview){ctx.fillStyle='#11191eef';ctx.fillRect(15,top+8,396,30);ctx.font='bold 13px Arial';ctx.fillStyle='#ffe29a';ctx.fillText('STYLE PREVIEW · SAMPLE VALUES, NOT COMBAT',24,top+28);}
+  const layout=this.mode==='smart'?new DamageLabelLayout(view.w,top,bottom):null,draws=[];
   for(const p of this.live){
    const age=Math.max(0,this.clock-p.born),t=age/p.life;
    let x=(p.x-view.x)*view.s+view.w*.5+p.drift*t;
@@ -692,9 +775,13 @@ class DamageText {
    const s=this.sprite(damageLabel(p.cents,p.count>1,p.core),color);
    const bounce=reduced?1:1+Math.sin(Math.min(1,age/.14)*Math.PI)*.18;
    const scale=p.size/30*bounce,w=s.w*scale,h=s.h*scale;
-   ctx.globalAlpha=Math.min(1,age/.045+.45)*Math.min(1,(1-t)/.33);
-   ctx.drawImage(s.canvas,x-w*.5,y-h*.5,w,h);
+   const alpha=Math.min(1,age/.045+.45)*Math.min(1,(1-t)/.33);
+   if(layout){
+    const envelope=p.size/30*(!reduced&&age<.14?1.18:1),ix=x+(s.ink.x+s.ink.w*.5-s.w*.5)*scale,iy=y+(s.ink.y+s.ink.h*.5-s.h*.5)*scale;
+    draws.push({p,x:ix,y:iy,w:s.ink.w*envelope+4,h:s.ink.h*envelope+4,canvas:s.canvas,drawX:x-w*.5,drawY:y-h*.5,drawW:w,drawH:h,alpha});
+   }else{ctx.globalAlpha=alpha;ctx.drawImage(s.canvas,x-w*.5,y-h*.5,w,h);}
   }
+  if(layout){const positions=layout.arrange(draws);for(let i=0;i<draws.length;i++){const d=draws[i],pos=positions[i];ctx.globalAlpha=d.alpha;ctx.drawImage(d.canvas,d.drawX+pos.x-d.x,d.drawY+pos.y-d.y,d.drawW,d.drawH);}}
   ctx.restore();this.cpu.push(performance.now()-start);if(this.cpu.length>300)this.cpu.shift();
  }
  report(){const a=[...this.cpu].sort((a,b)=>a-b),p=q=>a.length?a[Math.floor((a.length-1)*q)]:null;return{mode:this.mode,activeLabels:this.live.length,cap:this.mode==='overkill'?420:160,renderedLabels:this.shown,mergedLabels:this.grouped,receivedVictimTicks:this.received,suppressedCosmeticLabels:this.suppressed,cachedLabels:this.cache.size,overlayCPUms:{p50:p(.5),p95:p(.95)},warning:this.warning};}
